@@ -78,4 +78,56 @@ public class Board {
         }
     }
 
+    public String chooseGameToken(int gameToken){
+        String token= "";
+        switch (gameToken){
+            case 1:
+                token= "*";
+            case 2:
+                token= "!";
+            case 3:
+                token= "O";
+            case 4:
+                token= "X";
+            case 5:
+                token= "%";
+            case 6:
+                token= "$";
+            case 8:
+                token= "#";
+            case 9:
+                token= "&";
+        }
+        return token;
+    }
+
+    public void createrPlayerUno(String name, String gameToken){
+        if((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
+                || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))){
+            System.out.println("The game token already exists");
+            createrPlayerUno(name , gameToken);
+        }
+        Player playerUno= new Player(name, gameToken);
+        head.setPlayerUno(playerUno);
+    }
+
+    public void createrPlayerDos(String name, String gameToken){
+        if((head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))
+                || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))){
+            System.out.println("The game token already exists");
+            createrPlayerDos(name, gameToken);
+        }
+        Player playerDos= new Player(name, gameToken);
+        head.setPlayerDos(playerDos);
+    }
+
+    public void createrPlayerTres(String name, String gameToken){
+        if((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
+                || (head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))){
+            System.out.println("The game token already exists");
+            createrPlayerTres(name, gameToken);
+        }
+        Player playerTres= new Player(name, gameToken);
+        head.setPlayerTres(playerTres);
+    }
 }
