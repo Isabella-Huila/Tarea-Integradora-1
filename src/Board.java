@@ -253,36 +253,34 @@ public class Board {
     }
 
     public void createrPlayerUno(String name, String gameToken){
-        /*if((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
-                || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))){
-            System.out.println("The game token already exists");
-            createrPlayerUno(name , gameToken);
-        }*/
         Player playerUno= new Player(name, gameToken);
         head.setPlayerUno(playerUno);
     }
 
-    public void createrPlayerDos(String name, String gameToken){
-        /*
+
+    public boolean createrPlayerDos(String name, String gameToken){
         if((head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))
                 || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))){
             System.out.println("The game token already exists");
-            createrPlayerDos(name, gameToken);
-        }*/
+            return false;
+        }
         Player playerDos= new Player(name, gameToken);
         head.setPlayerDos(playerDos);
+        return true;
     }
 
-    public void createrPlayerTres(String name, String gameToken){
-        /*
+
+    public boolean createrPlayerTres(String name, String gameToken){
         if((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
                 || (head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))){
             System.out.println("The game token already exists");
-            createrPlayerTres(name, gameToken);
-        }*/
+            return false;
+        }
         Player playerTres= new Player(name, gameToken);
         head.setPlayerTres(playerTres);
+        return true;
     }
+
 
     public String playerinturn(int value){
         if(value==1){ return head.getPlayerUno().getName();}

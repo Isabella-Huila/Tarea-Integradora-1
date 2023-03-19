@@ -111,10 +111,14 @@ public class Main {
         reader.nextLine();
         String nameUno= reader.nextLine();
 
+
         System.out.println("Choose the token you are going to play with:\n 1. * \n 2. ! \n 3. O \n 4. X \n 5. % \n 6. $ \n 7. # \n 8. + \n 9. &");
         int gameTokenUno= reader.nextInt();
 
+
         board.createrPlayerUno(nameUno, board.chooseGameToken(gameTokenUno));
+
+
 
 
         System.out.println("Player two register");
@@ -122,18 +126,30 @@ public class Main {
         reader.nextLine();
         String nameDos= reader.nextLine();
 
-        System.out.println("Choose the token you are going to play with:\n 1. * \n 2. ! \n 3. O \n 4. X \n 5. % \n 6. $ \n 7. # \n 8. + \n 9. &");
-        int gameTokenDos= reader.nextInt();
 
-        board.createrPlayerDos(nameDos, board.chooseGameToken(gameTokenDos));
+        boolean created= true;
+        do {
+            System.out.println("Choose the token you are going to play with:\n 1. * \n 2. ! \n 3. O \n 4. X \n 5. % \n 6. $ \n 7. # \n 8. + \n 9. &");
+            int gameTokenDos= reader.nextInt();
+            created= board.createrPlayerDos(nameDos, board.chooseGameToken(gameTokenDos));
+        }while (created == false);
+
 
         System.out.println("Player three register");
         System.out.println("Enter the name");
         reader.nextLine();
         String nameTres= reader.nextLine();
 
-        System.out.println("Choose the token you are going to play with:\n 1. * \n 2. ! \n 3. O \n 4. X \n 5. % \n 6. $ \n 7. # \n 8. + \n 9. &");
-        int gameTokenTres= reader.nextInt();
 
-        board.createrPlayerTres(nameTres, board.chooseGameToken(gameTokenTres));
-    }}
+        do {
+            System.out.println("Choose the token you are going to play with:\n 1. * \n 2. ! \n 3. O \n 4. X \n 5. % \n 6. $ \n 7. # \n 8. + \n 9. &");
+            int gameTokenTres= reader.nextInt();
+
+
+            created= board.createrPlayerTres(nameTres, board.chooseGameToken(gameTokenTres));
+        }while (created == false);
+
+
+    }
+
+}
