@@ -89,7 +89,7 @@ public class Main {
                     if(turn>3){turn=1;}
                     break;
                 case 2:
-                    board.printBoardSL(board.getColumns()-1);
+                    board.printBoardSL(board.getColumns()+1);
                     break;
                 case 3:
                     System.out.println("Thanks for using our system");
