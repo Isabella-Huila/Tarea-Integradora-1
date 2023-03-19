@@ -1,12 +1,16 @@
 public class Player {
+
     private String name;
     private double score;
 
     private String gameToken;
 
+    private int turn;
+
     public Player(String name, String gameToken) {
         this.name = name;
         this.gameToken= gameToken;
+        this.turn=turn;
     }
 
     public void setName(String name) {
@@ -27,6 +31,14 @@ public class Player {
 
     public String getGameToken() {
         return gameToken;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
     public void setGameToken(String gameToken) {
