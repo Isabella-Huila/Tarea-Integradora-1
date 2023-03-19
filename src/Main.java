@@ -32,6 +32,8 @@ public class Main {
                     board.printBoard(column);
 
                     registerPlayers();
+                    board.printBoard(column);
+
                     break;
                 case 2:
                     System.out.println("Thanks for using our system");
