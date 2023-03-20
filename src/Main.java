@@ -70,7 +70,7 @@ public class Main {
         //Inicia a correr el tiempo
         long startTime= System.currentTimeMillis();
         boolean stopFlag = false;
-        int turn=1;
+        int turn=0;
         int dice;
 
         while (!stopFlag) {
@@ -86,12 +86,16 @@ public class Main {
             switch (mainOption) {
 
                 case 1:
-                    System.out.println("Player ["+board.playerinturn(turn).getName()+"]'s turn");
+                    System.out.println("Player ["+board.playerinturn(turn).getGameToken()+"]'s turn");
                     dice=(int) (Math.random() * 6)+1;
                     System.out.println("Dice Roll : "+dice);
                     //Espacio para funciones de movimiento y fin de juego
+                    if (board.movePlayer(dice, board.playerinturn(turn))){
+                        break;
+                    }
+                    board.printBoard(column);
                     turn++;
-                    if(turn>3){turn=1;}
+                    if(turn==3){turn=0;}
                     break;
                 case 2:
                     board.printBoardSL(board.getColumns()+1);
@@ -105,6 +109,7 @@ public class Main {
                     break;
 
             }
+
 
         }
         long finalTime = System.currentTimeMillis();

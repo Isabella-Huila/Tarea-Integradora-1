@@ -1,6 +1,5 @@
 import java.util.Random;
-
-
+import java.util.ArrayList;
 
 public class Board {
     private int row;
@@ -13,9 +12,7 @@ public class Board {
     private int ladders;
     private int length;
 
-    private Player playerUno;
-    private Player playerDos;
-    private Player playerTres;
+    private ArrayList<Player> turn= new ArrayList<>();
 
 
     public void addAtSqure(int veces, int row, int column){
@@ -78,16 +75,16 @@ public class Board {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() == null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null && current.getPlayerTres() == null) {
+            } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null){
-                System.out.println("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
             }else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
@@ -96,16 +93,16 @@ public class Board {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() == null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null && current.getPlayerTres() == null) {
+            } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null){
-                System.out.println("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
             }else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
@@ -122,16 +119,16 @@ public class Board {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() == null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null && current.getPlayerTres() == null) {
+            } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null){
-                System.out.println("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
             }else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
@@ -142,22 +139,23 @@ public class Board {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() == null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null && current.getPlayerTres() == null) {
+            } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null){
-                System.out.println("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
-                System.out.println("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
+                System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
             }else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
 
         }
     }
+
     public void printBoardSL(int column){
         printBoardSL(tail, column);
     }
@@ -246,6 +244,9 @@ public class Board {
             case 6:
                 token= "$";
                 break;
+            case 7:
+                token= "#";
+                break;
             case 8:
                 token= "#";
                 break;
@@ -259,6 +260,7 @@ public class Board {
     public void createrPlayerUno(String name, String gameToken){
         Player playerUno= new Player(name, gameToken);
         head.setPlayerUno(playerUno);
+        turn.add(playerUno);
     }
 
 
@@ -270,6 +272,7 @@ public class Board {
         }
         Player playerDos= new Player(name, gameToken);
         head.setPlayerDos(playerDos);
+        turn.add(playerDos);
         return true;
     }
 
@@ -282,16 +285,19 @@ public class Board {
         }
         Player playerTres= new Player(name, gameToken);
         head.setPlayerTres(playerTres);
+        turn.add(playerTres);
         return true;
     }
 
 
+
     public Player playerinturn(int value){
-        if(value==1){ return head.getPlayerUno();}
-        if(value==2){ return head.getPlayerDos();}
-        if(value==3){ return head.getPlayerTres();}
+        if(value==0){ return turn.get(0);}
+        if(value==1){ return turn.get(1);}
+        if(value==2){ return turn.get(2);}
         return null;
     }
+
 
 
     public Square searchSquare (int value){
@@ -435,6 +441,62 @@ public class Board {
         this.length = length;
     }
 
+    public boolean movePlayer(int dice, Player player) {
+        Square current = searchPlayer(player);
+        return movePlayer(dice, player, current);
+    }
+
+    public boolean movePlayer(int dice, Player player, Square current) {
+        if (current == null) {
+            return true;
+        }
+        if (current == this.tail) {
+            return true;
+        }
+        if (current.getPlayerUno() == player) {
+            current.setPlayerUno(null);
+        }
+        if (current.getPlayerDos() == player) {
+            current.setPlayerDos(null);
+        }
+        if (current.getPlayerTres() == player) {
+            current.setPlayerTres(null);
+        }
+        if (dice == 0) {
+            if (current == tail) {
+                return true;
+            }
+            if (current == null) {
+                return true;
+            }
+            if (current.getPlayerUno() == null) {
+                current.setPlayerUno(player);
+                return false;
+            } else if (current.getPlayerDos() == null) {
+                current.setPlayerDos(player);
+                return false;
+            } else if (current.getPlayerTres() == null) {
+                current.setPlayerTres(player);
+                return false;
+            }
+        }
+        return movePlayer(dice - 1, player, current.getNext());
+    }
+
+    private Square searchPlayer(Player player) {
+        return searchPlayer(player, head);
+    }
+
+    private Square searchPlayer(Player player, Square current) {
+        if (current == tail) {
+            return tail;
+        }
+        if (current.getPlayerUno() == player || current.getPlayerDos() == player || current.getPlayerTres() == player) {
+            return current;
+        }
+
+        return searchPlayer(player, current.getNext());
+    }
 
 }
 
