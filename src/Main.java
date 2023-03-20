@@ -3,6 +3,10 @@ public class Main {
 
     public static Scanner reader= new Scanner(System.in);
     public static Board board= new Board();
+
+    public static int column=0;
+
+    public static TopScore topScore = new TopScore();
     public static void main(String[] args) {
         Menu();
     }
@@ -28,7 +32,7 @@ public class Main {
                     System.out.println("Enter the number of rows");
                     int row= reader.nextInt();
                     System.out.println("Enter the number of columns");
-                    int column= reader.nextInt();
+                    column= reader.nextInt();
                     board.addAtSqure(0 , row , column);
                     board.printBoard(column);
 
@@ -63,7 +67,8 @@ public class Main {
     public static void MenuGame() {
 
         System.out.println("Game Menu");
-
+        //Inicia a correr el tiempo
+        long startTime= System.currentTimeMillis();
         boolean stopFlag = false;
         int turn=1;
         int dice;
@@ -81,7 +86,7 @@ public class Main {
             switch (mainOption) {
 
                 case 1:
-                    System.out.println("Player ["+board.playerinturn(turn)+"]'s turn");
+                    System.out.println("Player ["+board.playerinturn(turn).getName()+"]'s turn");
                     dice=(int) (Math.random() * 6)+1;
                     System.out.println("Dice Roll : "+dice);
                     //Espacio para funciones de movimiento y fin de juego
@@ -102,7 +107,11 @@ public class Main {
             }
 
         }
+        long finalTime = System.currentTimeMillis();
+        calcultaScore(startTime , finalTime);
 
+        System.out.println("TOP");
+        topScore.top();
     }
 
     public static void registerPlayers(){
@@ -149,7 +158,24 @@ public class Main {
             created= board.createrPlayerTres(nameTres, board.chooseGameToken(gameTokenTres));
         }while (created == false);
 
+    }
 
+    public static void calcultaScore(long starTime, long finalTime){
+        long totalTime = finalTime - starTime;
+        long  score = (long) ((600000 - totalTime) / 600.0);
+
+        if (board.getTail().getPlayerTres() != null){
+            board.getTail().getPlayerTres().setScore(score);
+            topScore.addScoreRegister(board.getTail().getPlayerTres());
+        } else if (board.getTail().getPlayerDos() != null) {
+            board.getTail().getPlayerDos().setScore(score);
+            topScore.addScoreRegister(board.getTail().getPlayerDos());
+        } else if (board.getTail().getPlayerUno() != null) {
+            board.getTail().getPlayerUno().setScore(score);
+            topScore.addScoreRegister(board.getTail().getPlayerUno());
+        }
+
+        System.out.println("your score is: " + score);
     }
 
 }

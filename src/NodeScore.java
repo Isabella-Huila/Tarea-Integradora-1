@@ -2,6 +2,8 @@ public class NodeScore {
     private double score;
     private Player player;
 
+    private NodeScore right;
+    private NodeScore left;
 
 
     public NodeScore(Player player) {
@@ -23,5 +25,21 @@ public class NodeScore {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setRight(NodeScore right) {
+        this.right = right;
+    }
+
+    public void setLeft(NodeScore left) {
+        this.left = left;
+    }
+
+    public NodeScore getRight() {
+        return right;
+    }
+
+    public NodeScore getLeft() {
+        return left;
     }
 }

@@ -13,6 +13,10 @@ public class Board {
     private int ladders;
     private int length;
 
+    private Player playerUno;
+    private Player playerDos;
+    private Player playerTres;
+
 
     public void addAtSqure(int veces, int row, int column){
         if (row * column == veces){
@@ -282,11 +286,11 @@ public class Board {
     }
 
 
-    public String playerinturn(int value){
-        if(value==1){ return head.getPlayerUno().getName();}
-        if(value==2){ return head.getPlayerDos().getName();}
-        if(value==3){ return head.getPlayerTres().getName();}
-        return "";
+    public Player playerinturn(int value){
+        if(value==1){ return head.getPlayerUno();}
+        if(value==2){ return head.getPlayerDos();}
+        if(value==3){ return head.getPlayerTres();}
+        return null;
     }
 
 
@@ -303,6 +307,8 @@ public class Board {
     public boolean checkOverlap(int pos) {
         Square current = head;
         if(pos==1){ return true;}
+
+        if (pos==row*column)return true;
 
         while (current != null) {
             if (current.getNum() == pos) {
@@ -370,6 +376,8 @@ public class Board {
 
         createLadders(numLadders - 1);
     }
+
+
 
     public Square getHead() {
         return head;
