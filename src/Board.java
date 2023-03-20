@@ -6,104 +6,107 @@ public class Board {
     private int column;
     private Square head;
     private Square tail;
-    private static int n=0;
+    private static int n = 0;
+
+    private static int diceNew = 0;
 
     private int snakes;
     private int ladders;
     private int length;
 
-    private ArrayList<Player> turn= new ArrayList<>();
+    private ArrayList<Player> turn = new ArrayList<>();
 
 
-    public void addAtSqure(int veces, int row, int column){
-        if (row * column == veces){
+    public void addAtSqure(int veces, int row, int column) {
+        if (row * column == veces) {
             return;
         }
         n++;
-        Square node= new Square(n);
+        Square node = new Square(n);
 
-        if(head == null){
+        if (head == null) {
             head = node;
-            tail= node;
-        }else {
+            tail = node;
+        } else {
             tail.setNext(node);
             node.setPrevius(tail);
-            tail= node;
+            tail = node;
         }
-        this.row=row;
-        this.column=column;
-        this.length=this.row*this.column;
-        addAtSqure(veces+1, row , column);
+        this.row = row;
+        this.column = column;
+        this.length = this.row * this.column;
+        addAtSqure(veces + 1, row, column);
     }
-    public void printBoard(int column){
+
+    public void printBoard(int column) {
         printBoard(tail, column);
     }
 
-    public void printBoard(Square current,int column){
-        if (head.getNext()==tail){
-            System.out.println("[ " + head.getNum() + " ]");;
+    public void printBoard(Square current, int column) {
+        if (head.getNext() == tail) {
+            System.out.println("[ " + head.getNum() + " ]");
+            ;
         }
-        if (current== null){
+        if (current == null) {
             return;
-        }else if (column%2==0){
-            if (current.getNum()%(column*2)==0){
-                printInOrder(current , column);
+        } else if (column % 2 == 0) {
+            if (current.getNum() % (column * 2) == 0) {
+                printInOrder(current, column);
+                System.out.println();
+            } else if (current.getNum() % column == 0) {
+                printReverse(current, column);
                 System.out.println();
             }
-            else if(current.getNum()%column==0){
-                printReverse(current , column);
-                System.out.println();
-            }
-        }else {
+        } else {
             if (current.getNum() % column == 0) {
-                if (current.getNum() % 2 == 0){
-                    printInOrder(current , column);
+                if (current.getNum() % 2 == 0) {
+                    printInOrder(current, column);
                     System.out.println();
-                }else {
-                    printReverse(current , column);
+                } else {
+                    printReverse(current, column);
                     System.out.println();
                 }
             }
         }
-        printBoard(current.getPrevius(),column);
+        printBoard(current.getPrevius(), column);
     }
 
 
-    public void printInOrder(Square current, int column){
-        if (current==head||current.getPrevius().getNum()%column==0){
-            if((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null){
+    public void printInOrder(Square current, int column) {
+        if (current == head || current.getPrevius().getNum() % column == 0) {
+            if ((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null){
+            } else if (current.getPlayerDos() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
-            }else {
+            } else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
-        }else{
-            if((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null){
+        } else {
+            if ((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null){
+            } else if (current.getPlayerDos() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
-            }else {
+            } else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
 
@@ -113,43 +116,43 @@ public class Board {
 
     }
 
-    public void printReverse(Square current, int column){
-        if (current==head||current.getPrevius().getNum()%column==0){
-            if((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null){
+    public void printReverse(Square current, int column) {
+        if (current == head || current.getPrevius().getNum() % column == 0) {
+            if ((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null){
+            } else if (current.getPlayerDos() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
-            }else {
+            } else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
-        }else{
+        } else {
             printReverse(current.getPrevius(), column);
 
-            if((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null){
+            if ((current.getPlayerUno() != null && current.getPlayerDos() != null) && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if ((current.getPlayerUno() != null && current.getPlayerDos() != null)) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerDos().getGameToken() + " ]");
-            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null){
+            } else if (current.getPlayerUno() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerDos() != null && current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + current.getPlayerTres().getGameToken() + " ]");
             } else if (current.getPlayerUno() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerUno().getGameToken() + " ]");
-            } else if (current.getPlayerDos() != null){
+            } else if (current.getPlayerDos() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerDos().getGameToken() + " ]");
             } else if (current.getPlayerTres() != null) {
                 System.out.print("[ " + current.getNum() + current.getPlayerTres().getGameToken() + " ]");
-            }else {
+            } else {
                 System.out.print("[ " + current.getNum() + " ]");
             }
 
@@ -220,84 +223,85 @@ public class Board {
         }
     }
 
-
-
-
-    public String chooseGameToken(int gameToken){
-        String token= "";
-        switch (gameToken){
+    public String chooseGameToken(int gameToken) {
+        String token = "";
+        switch (gameToken) {
             case 1:
-                token= "*";
+                token = "*";
                 break;
             case 2:
-                token= "!";
+                token = "!";
                 break;
             case 3:
-                token= "O";
+                token = "O";
                 break;
             case 4:
-                token= "X";
+                token = "X";
                 break;
             case 5:
-                token= "%";
+                token = "%";
                 break;
             case 6:
-                token= "$";
+                token = "$";
                 break;
             case 7:
-                token= "#";
+                token = "#";
                 break;
             case 8:
-                token= "#";
+                token = "+";
                 break;
             case 9:
-                token= "&";
+                token = "&";
                 break;
         }
         return token;
     }
 
-    public void createrPlayerUno(String name, String gameToken){
-        Player playerUno= new Player(name, gameToken);
+    public void createrPlayerUno(String name, String gameToken) {
+        Player playerUno = new Player(name, gameToken);
         head.setPlayerUno(playerUno);
         turn.add(playerUno);
     }
 
 
-    public boolean createrPlayerDos(String name, String gameToken){
-        if((head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))
-                || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))){
+    public boolean createrPlayerDos(String name, String gameToken) {
+        if ((head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))
+                || (head.getPlayerTres() != null && head.getPlayerTres().getGameToken().equals(gameToken))) {
             System.out.println("The game token already exists");
             return false;
         }
-        Player playerDos= new Player(name, gameToken);
+        Player playerDos = new Player(name, gameToken);
         head.setPlayerDos(playerDos);
         turn.add(playerDos);
         return true;
     }
 
 
-    public boolean createrPlayerTres(String name, String gameToken){
-        if((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
-                || (head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))){
+    public boolean createrPlayerTres(String name, String gameToken) {
+        if ((head.getPlayerDos() != null && head.getPlayerDos().getGameToken().equals(gameToken))
+                || (head.getPlayerUno() != null && head.getPlayerUno().getGameToken().equals(gameToken))) {
             System.out.println("The game token already exists");
             return false;
         }
-        Player playerTres= new Player(name, gameToken);
+        Player playerTres = new Player(name, gameToken);
         head.setPlayerTres(playerTres);
         turn.add(playerTres);
         return true;
     }
 
 
-
-    public Player playerinturn(int value){
-        if(value==0){ return turn.get(0);}
-        if(value==1){ return turn.get(1);}
-        if(value==2){ return turn.get(2);}
+    public Player playerinturn(int value) {
+        if (value == 0) {
+            return turn.get(0);
+        }
+        if (value == 1) {
+            return turn.get(1);
+        }
+        if (value == 2) {
+            return turn.get(2);
+        }
         return null;
     }
-
 
 
     public Square searchSquare (int value){
@@ -314,7 +318,7 @@ public class Board {
         Square current = head;
         if(pos==1){ return true;}
 
-        if (pos==row*column)return true;
+        if (pos==row*column){ return true; }
 
         while (current != null) {
             if (current.getNum() == pos) {
@@ -332,8 +336,8 @@ public class Board {
             return;
         }
 
-        int headPos = (int) (Math.random() * row*column) + 1;
-        int tailPos = (int) (Math.random() * (headPos - 1)) + 1;
+        int headPos = (int) (Math.random() * (row*column)) + 1;
+        int tailPos = (int) (Math.random() * (headPos - row)) + 1;
 
 
         if (checkOverlap(headPos) || checkOverlap(tailPos)) {
@@ -350,7 +354,7 @@ public class Board {
 
         tailNode.setSnakestart(headNode);
         tailNode.setSnakeend(tailNode);
-        tailNode.setmessage(tailNode.getmessage()+""+(char) (numSnakes + 64));
+        tailNode.setmessage(tailNode.getmessage()+(char) (numSnakes + 64));
 
         createSnakes(numSnakes - 1);
     }
@@ -360,8 +364,8 @@ public class Board {
             return;
         }
 
-        int headPos = (int) (Math.random() * row*column) + 1;
-        int tailPos = (int) (Math.random() * (headPos - 1)) + 1;
+        int headPos = (int) (Math.random() * (row*column-column)) + 1;
+        int tailPos = (int) (Math.random() * (row*column-(headPos+column))) + (headPos+column);
 
 
         if (checkOverlap(headPos) || checkOverlap(tailPos)) {
@@ -378,12 +382,10 @@ public class Board {
 
         tailNode.setLadderstart(headNode);
         tailNode.setLadderend(tailNode);
-        tailNode.setmessage(tailNode.getmessage()+""+numLadders);
+        tailNode.setmessage(tailNode.getmessage()+numLadders);
 
         createLadders(numLadders - 1);
     }
-
-
 
     public Square getHead() {
         return head;
@@ -406,7 +408,7 @@ public class Board {
     }
 
     public void setColumns(int column) {
-        this.column= column;
+        this.column = column;
     }
 
     public int getFilas() {
@@ -446,13 +448,17 @@ public class Board {
         return movePlayer(dice, player, current);
     }
 
+    public boolean checkPlayer(Player player) {
+        Square current = searchPlayer(player);
+        if (current.getLadderend()!=null)
+        {return movePlayertoSquare(player, current, current.getLadderend());}
+        if (current.getSnakeend()!=null)
+        {return movePlayertoSquare(player, current, current.getSnakeend());}
+
+        return true;
+    }
+
     public boolean movePlayer(int dice, Player player, Square current) {
-        if (current == null) {
-            return true;
-        }
-        if (current == this.tail) {
-            return true;
-        }
         if (current.getPlayerUno() == player) {
             current.setPlayerUno(null);
         }
@@ -463,10 +469,15 @@ public class Board {
             current.setPlayerTres(null);
         }
         if (dice == 0) {
+
             if (current == tail) {
-                return true;
-            }
-            if (current == null) {
+                if (current.getPlayerUno() == null) {
+                    current.setPlayerUno(player);
+                } else if (current.getPlayerDos() == null) {
+                    current.setPlayerDos(player);
+                } else if (current.getPlayerTres() == null) {
+                    current.setPlayerTres(player);
+                }
                 return true;
             }
             if (current.getPlayerUno() == null) {
@@ -483,6 +494,7 @@ public class Board {
         return movePlayer(dice - 1, player, current.getNext());
     }
 
+
     private Square searchPlayer(Player player) {
         return searchPlayer(player, head);
     }
@@ -498,6 +510,74 @@ public class Board {
         return searchPlayer(player, current.getNext());
     }
 
+    public boolean movePlayertoSquare(Player player, Square current, Square tomove) {
+        if (current == null || tomove == null) {
+            return true;
+        }
+        if (current == this.tail || tomove == tail) {
+            return true;
+        }
+        if (current.getPlayerUno() == player) {
+            current.setPlayerUno(null);
+        }
+        if (current.getPlayerDos() == player) {
+            current.setPlayerDos(null);
+
+        }
+        if (current.getPlayerTres() == player) {
+            current.setPlayerTres(null);
+
+        }
+
+        if (tomove == tail) {
+            return true;
+        }
+        if (tomove == null) {
+            return true;
+        }
+        if (tomove.getPlayerUno() == null) {
+            tomove.setPlayerUno(player);
+            return false;
+        } else if (tomove.getPlayerDos() == null) {
+            tomove.setPlayerDos(player);
+            return false;
+        } else if (tomove.getPlayerTres() == null) {
+            tomove.setPlayerTres(player);
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+    public boolean throwDice(int turn){
+        int dice=(int) (Math.random() * 6)+1;
+        System.out.println("Dice Roll : "+dice);
+        this.turn.get(turn).setSquaresTraveled(this.turn.get(turn).getSquaresTraveled() + dice);
+        if(this.turn.get(turn).getSquaresTraveled() >= row*column){
+            System.out.println("His throw is greater than the squares he lacks to win. Plase try it in the other round");
+            this.turn.get(turn).setSquaresTraveled(this.turn.get(turn).getSquaresTraveled() - dice);
+        }else {
+            return movePlayer(dice, this.turn.get(turn));
+        }
+        return false;
+    }
+
+    public void restoreGame(){
+        System.out.println(searchPlayer(this.turn.get(0)).getNum());
+        searchPlayer(this.turn.get(0)).setPlayerUno(null);
+        head.setPlayerUno(this.turn.get(0));
+
+        System.out.println(searchPlayer(this.turn.get(1)).getNum());
+        searchPlayer(this.turn.get(1)).setPlayerDos(null);
+        head.setPlayerDos(this.turn.get(1));
+
+        System.out.println(searchPlayer(this.turn.get(2)).getNum());
+        searchPlayer(this.turn.get(2)).setPlayerTres(null);
+        head.setPlayerTres(this.turn.get(2));
+
+    }
 }
 
     

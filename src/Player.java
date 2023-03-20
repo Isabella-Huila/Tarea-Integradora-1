@@ -5,6 +5,8 @@ public class Player {
 
     private String gameToken;
 
+    private int squaresTraveled;
+
     private int turn;
 
     public Player(String name, String gameToken) {
@@ -43,5 +45,13 @@ public class Player {
 
     public void setGameToken(String gameToken) {
         this.gameToken = gameToken;
+    }
+
+    public void setSquaresTraveled(int squaresTraveled) {
+        this.squaresTraveled = squaresTraveled;
+    }
+
+    public int getSquaresTraveled() {
+        return squaresTraveled;
     }
 }

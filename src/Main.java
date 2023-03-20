@@ -6,6 +6,10 @@ public class Main {
 
     public static int column=0;
 
+    public static int veces=0;
+
+    public static int turn=0;
+
     public static TopScore topScore = new TopScore();
     public static void main(String[] args) {
         Menu();
@@ -29,24 +33,30 @@ public class Main {
             switch (mainOption) {
 
                 case 1:
-                    System.out.println("Enter the number of rows");
-                    int row= reader.nextInt();
-                    System.out.println("Enter the number of columns");
-                    column= reader.nextInt();
-                    board.addAtSqure(0 , row , column);
+                    veces++;
+
+                    if (veces==1){
+                        System.out.println("Enter the number of rows");
+                        int row= reader.nextInt();
+                        System.out.println("Enter the number of columns");
+                        column= reader.nextInt();
+                        board.addAtSqure(0 , row , column);
+                        board.printBoard(column);
+
+                        System.out.println("Enter the number of Snakes");
+                        int snakes = reader.nextInt();
+                        System.out.println(" Enter the number of Ladders");
+                        int ladders = reader.nextInt();
+
+                        board.createSnakes(snakes);
+                        board.createLadders(ladders);
+
+                        registerPlayers();
+
+                    }else {
+                        board.restoreGame();
+                    }
                     board.printBoard(column);
-
-                    System.out.println("Enter the number of Snakes");
-                    int snakes = reader.nextInt();
-                    System.out.println(" Enter the number of Ladders");
-                    int ladders = reader.nextInt();
-
-                    board.createSnakes(snakes);
-                    board.createLadders(ladders);
-
-                    board.printBoard(column);
-                    registerPlayers();
-
                     MenuGame();
 
                     break;
@@ -67,11 +77,10 @@ public class Main {
     public static void MenuGame() {
 
         System.out.println("Game Menu");
-        //Inicia a correr el tiempo
         long startTime= System.currentTimeMillis();
         boolean stopFlag = false;
-        int turn=0;
-        int dice;
+        turn=0;
+
 
         while (!stopFlag) {
 
@@ -79,7 +88,6 @@ public class Main {
             System.out.println("Type an option");
             System.out.println("1. Roll the Dice");
             System.out.println("2. See Snakes and ladders");
-            System.out.println("3. Exit");
 
             int mainOption = reader.nextInt();
 
@@ -87,22 +95,18 @@ public class Main {
 
                 case 1:
                     System.out.println("Player ["+board.playerinturn(turn).getGameToken()+"]'s turn");
-                    dice=(int) (Math.random() * 6)+1;
-                    System.out.println("Dice Roll : "+dice);
-                    //Espacio para funciones de movimiento y fin de juego
-                    if (board.movePlayer(dice, board.playerinturn(turn))){
+
+                    if (board.throwDice(turn)){
+                        stopFlag= true;
                         break;
                     }
+                    board.checkPlayer(board.playerinturn(turn));
                     board.printBoard(column);
                     turn++;
                     if(turn==3){turn=0;}
                     break;
                 case 2:
-                    board.printBoardSL(board.getColumns()+1);
-                    break;
-                case 3:
-                    System.out.println("Thanks for using our system");
-                    stopFlag = true;
+                    board.printBoardSL(board.getColumns());
                     break;
                 default:
                     System.out.println("You must type a valid option");
@@ -110,8 +114,8 @@ public class Main {
 
             }
 
-
         }
+
         long finalTime = System.currentTimeMillis();
         calcultaScore(startTime , finalTime);
 
